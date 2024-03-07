@@ -1,0 +1,35 @@
+{%extends 'base.html'%}
+
+{%block head%}
+
+{% endblock%}
+
+
+{%block body%}
+<div class="container">
+    <form method="POST" class="city-form">
+    <label for="city">Insert a city name</label>
+    <input type="text" id="city" name="city" placeholder="City name">
+    <button type="submit" class="submit-btn">Get the weather!</button>
+    </form>
+    <table>
+        <tr class="days-wrapper">
+            {%if weather_status%}
+            {% for i in range(3) %}
+            <td class="day">
+                <p>{{day[i]}}</p>
+               <p>{{weather_status[i]}}</p> 
+            </td>
+            {%endfor%} 
+            {%else%}
+            <td class="day">
+                <p>There is no information for this city. Maybe try another one.</p>
+            </td>
+            {%endif%}
+            
+            
+        </tr>
+    </table>
+    </div> 
+</div>
+{% endblock%}
