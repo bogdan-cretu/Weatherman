@@ -34,14 +34,14 @@ def city():
     day = []
     currentCity = request.form.get("city")
     processedCity = currentCity.lower().capitalize()
-    days = 3
+    numberOfDays = 3
     api_url = "http://api.weatherapi.com/v1/forecast.json"
     api_key = "ee0eefcce1334187937122206240703"
-    params = {"key": api_key, "q": processedCity, "days": days}
+    params = {"key": api_key, "q": processedCity, "days": numberOfDays}
     response = requests.post(api_url, params=params)
     if response:
         response_json = response.json()
-        for i in range(days):
+        for i in range(numberOfDays):
             weather_status.append(response_json["forecast"]["forecastday"][i]["day"]["condition"]["text"])
             day.append(response_json["forecast"]["forecastday"][i]["date"])
         
@@ -59,12 +59,12 @@ def city():
             db.session.commit()
         except:
             print("An exception has occurred")
-        return render_template("index.html", weather_status = weather_status, day = day)
+        return render_template("index.html", weather_status = weather_status, day = day, numberOfDays = numberOfDays)
     else:
         return render_template("index.html")
 
-def index():
-    return render_template('index.html')
+# def index():
+#     return render_template('index.html')
 
 
 if __name__ == "__main__":
